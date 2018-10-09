@@ -6,9 +6,11 @@
  Arduino pin 5 -> HX711 DOUT
  Arduino pin 5V -> HX711 VCC
  Arduino pin GND -> HX711 GND
-    D0           Led_Wifi 
+    D2           Led_Wifi 
+    D0           Led Envio Datos
 */
 #define LED D0
+#define LED_BUILTIN D2
 #include "HX711.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
@@ -24,6 +26,8 @@ long milisanteriores = 0, milisanteriores2 = 0;
 
 
 void setup() {
+                pinMode(LED_BUILTIN, OUTPUT);
+                digitalWrite(LED_BUILTIN, LOW); 
                 pinMode(LED, OUTPUT);     
                 digitalWrite(LED, LOW);         
                 Serial.begin(9600);
@@ -51,7 +55,10 @@ void setup() {
               }
 
 void loop() {
-             if(millis() - milisanteriores >= 1000){     
+               if (WiFi.status() == WL_CONNECTED) {
+                                                  digitalWrite(LED_BUILTIN, HIGH);
+                                                   } else {digitalWrite(LED_BUILTIN, LOW);}
+               if(millis() - milisanteriores >= 1000){     
                                                     milisanteriores = millis();
                                                     scale.set_scale(calibration_factor);
                                                     unidades = scale.get_units(), 10;
