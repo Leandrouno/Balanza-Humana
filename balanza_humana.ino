@@ -32,8 +32,7 @@ void setup() {
                 scale.set_scale();
                 scale.tare();  
                 WiFi.mode(WIFI_STA);
-                WiFiMulti.addAP("Quien es Mi Idolo ?", "LioMessi");
-              //  WiFiMulti.addAP("LosPuchus", "BastaMartina2017");
+                WiFiMulti.addAP("yyyyyyyyyy", "xxxxxxxxx");
                 Serial.println();
                 Serial.print("Conectando al  WiFi... ");
                       while (WiFiMulti.run() != WL_CONNECTED) {
